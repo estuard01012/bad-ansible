@@ -21,7 +21,7 @@
   tasks:
   - name: enable repos
     template:
-      src: ./open_three-tier-app.repo
+      src: /etc/yum.repos.d/open_three-tier-app.repo
       dest: /etc/yum.repos.d/open_three-tier-app.repo
       mode: 0644
 
@@ -89,6 +89,14 @@
   become: true
 
   tasks:
+  - name: create /usr/share/tomcat/webapps/ansible
+    file:
+      state: directory
+      path: /usr/share/tomcat/webapps/ansible
+      owner: root
+      group: root
+      mode: u=rwx,go=rx
+
   - name: copy static index.html to tomcat webapps/ansible/index.html
     template:
       src: index.html.app1
@@ -100,6 +108,14 @@
   become: true
 
   tasks:
+  - name: create /usr/share/tomcat/webapps/ansible
+    file:
+      state: directory
+      path: /usr/share/tomcat/webapps/ansible
+      owner: root
+      group: root
+      mode: u=rwx,go=rx
+
   - name: copy static index.html to tomcat webapps/ansible/index.html
     template:
       src: index.html.app2
